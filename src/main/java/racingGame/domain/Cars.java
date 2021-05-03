@@ -25,7 +25,8 @@ public class Cars {
         for (Car car : cars) {
             movedCars.add(car.move(moveStrategy));
         }
-        return new Cars(movedCars);    }
+        return new Cars(movedCars);
+    }
 
     public List<Car> getCars() {
         return Collections.unmodifiableList(cars);
@@ -38,14 +39,9 @@ public class Cars {
     public List<Car> findSamePosition(Car max) {
         List<Car> findedCars = new ArrayList<>();
         for (Car car : cars) {
-            findCars(findedCars, car.samePosition(max));
+            Optional<Car> winner = car.samePosition(max);
+            winner.ifPresent(findedCars::add);
         }
         return findedCars;
-    }
-
-    private void findCars(List<Car> findedCars, Optional<Car> max) {
-        if (max.isPresent()) {
-            findedCars.add(max.get());
-        }
     }
 }
