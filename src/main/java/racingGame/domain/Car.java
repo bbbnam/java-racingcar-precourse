@@ -24,6 +24,18 @@ public class Car implements Comparable<Car>{
         return new Car(this.name, this.position);
     }
 
+    public Optional<Car> samePosition(Car maxPositionCar) {
+        if (this.position == maxPositionCar.position) {
+            return Optional.of(this);
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public int compareTo(Car other) {
+        return this.position - other.position;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -36,17 +48,5 @@ public class Car implements Comparable<Car>{
     @Override
     public int hashCode() {
         return Objects.hash(name, position);
-    }
-
-    @Override
-    public int compareTo(Car other) {
-        return this.position - other.position;
-    }
-
-    public Optional<Car> samePosition(Car maxPositionCar) {
-        if (this.position == maxPositionCar.position) {
-            return Optional.of(this);
-        }
-        return Optional.empty();
     }
 }
