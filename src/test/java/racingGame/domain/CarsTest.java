@@ -40,9 +40,8 @@ public class CarsTest {
     @DisplayName("자동차 최소 대수 테스트 - 1대 이상이어야 함")
     @Test
     void validateCarsSize() {
-        assertThatThrownBy(
-                () -> new Cars(Collections.singletonList((new Car("자동차1", 0))))
-        ).isInstanceOf(IllegalArgumentException.class)
+        assertThatThrownBy(() -> new Cars(Collections.singletonList((new Car("자동차1", 0)))))
+                .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("자동차 게임은 최소 차 2대 이상은 되어야 합니다.");
     }
 }
