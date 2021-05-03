@@ -5,7 +5,9 @@ import java.util.Optional;
 
 public class Car implements Comparable<Car> {
     private static final int NAME_LIMIT = 5;
+    private static final int POSITION_MIN = 0;
     private static final String NAME_LIMIT_MESSAGE = "이름은 5자 이하만 가능합니다.";
+    private static final String POSITION_MIN_MESSAGE = "이동상태(position) 값은 음수가 될 수 없습니다.";
 
     private final String name;
     private int position;
@@ -16,6 +18,7 @@ public class Car implements Comparable<Car> {
 
     public Car(String name, int position) {
         validateName(name);
+        validatePosition(position);
         this.name = name;
         this.position = position;
     }
@@ -23,6 +26,12 @@ public class Car implements Comparable<Car> {
     private void validateName(String name) {
         if (name.length() > NAME_LIMIT) {
             throw new IllegalArgumentException(NAME_LIMIT_MESSAGE);
+        }
+    }
+
+    private void validatePosition(int position) {
+        if (position < POSITION_MIN) {
+            throw new IllegalArgumentException(POSITION_MIN_MESSAGE);
         }
     }
 
