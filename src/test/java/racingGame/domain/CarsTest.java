@@ -3,19 +3,22 @@ package racingGame.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.Collections;
 
+import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CarsTest {
 
+    private final Car car1 = new Car("자동차1");
+    private final Car car2 = new Car("자동차2");
+    private final Car car3 = new Car("자동차3");
+
     @DisplayName("자동차들 객체 전체 이동 -> 이동조건이 무조건 참일때")
     @Test
     void moveAll() {
-        Cars cars = new Cars(Arrays.asList(new Car("자동차1", 0),
-                new Car("자동차2", 0), new Car("자동차3", 0)));
+        Cars cars = new Cars(asList(car1, car2, car3));
 
         cars = cars.moveAll(() -> true);
 
@@ -26,8 +29,7 @@ public class CarsTest {
     @DisplayName("자동차들 객체 전체 이동x(멈춤) -> 이동조건이 무조건 거짓일때")
     @Test
     void notMoveAll() {
-        Cars cars = new Cars(Arrays.asList(new Car("자동차1", 0),
-                new Car("자동차2", 0), new Car("자동차3", 0)));
+        Cars cars = new Cars(asList(car1, car2, car3));
 
         cars = cars.moveAll(() -> false);
 
