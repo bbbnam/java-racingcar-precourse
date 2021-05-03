@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class Cars {
+    private static final int CARS_MIN = 2;
+    private static final String CARS_MIN_MESSAGE = "자동차 게임은 최소 차 2대 이상은 되어야 합니다.";
 
     private final List<Car> cars;
 
@@ -15,8 +17,8 @@ public class Cars {
     }
 
     private void validateSize(List<Car> cars) {
-        if (cars.size() < 2) {
-            throw new IllegalArgumentException("자동차 게임은 최소 차 2대 이상은 되어야 합니다.");
+        if (cars.size() < CARS_MIN) {
+            throw new IllegalArgumentException(CARS_MIN_MESSAGE);
         }
     }
 

@@ -4,6 +4,8 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class Car implements Comparable<Car> {
+    private static final int NAME_LIMIT = 5;
+    private static final String NAME_LIMIT_MESSAGE = "이름은 5자 이하만 가능합니다.";
 
     private final String name;
     private int position;
@@ -19,8 +21,8 @@ public class Car implements Comparable<Car> {
     }
 
     private void validateName(String name) {
-        if (name.length() > 5) {
-            throw new IllegalArgumentException("이름은 5자 이하만 가능합니다.");
+        if (name.length() > NAME_LIMIT) {
+            throw new IllegalArgumentException(NAME_LIMIT_MESSAGE);
         }
     }
 
