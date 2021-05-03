@@ -1,8 +1,9 @@
 package racingGame.domain;
 
 import java.util.Objects;
+import java.util.Optional;
 
-public class Car {
+public class Car implements Comparable<Car>{
 
     private final String name;
     private int position;
@@ -35,5 +36,17 @@ public class Car {
     @Override
     public int hashCode() {
         return Objects.hash(name, position);
+    }
+
+    @Override
+    public int compareTo(Car other) {
+        return this.position - other.position;
+    }
+
+    public Optional<Car> samePosition(Car maxPositionCar) {
+        if (this.position == maxPositionCar.position) {
+            return Optional.of(this);
+        }
+        return Optional.empty();
     }
 }

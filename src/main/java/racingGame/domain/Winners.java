@@ -11,6 +11,7 @@ public class Winners {
     }
 
     public List<Car> findWinner() {
-
+        Car maxPositionCar = records.findMaxPosition();
+        return records.findSamePosition(maxPositionCar);
     }
 }

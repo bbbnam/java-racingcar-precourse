@@ -3,6 +3,7 @@ package racingGame.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public class Cars {
 
@@ -28,5 +29,23 @@ public class Cars {
 
     public List<Car> getCars() {
         return Collections.unmodifiableList(cars);
+    }
+
+    public Car findMaxPosition() {
+        return Collections.max(cars);
+    }
+
+    public List<Car> findSamePosition(Car max) {
+        List<Car> findedCars = new ArrayList<>();
+        for (Car car : cars) {
+            findCars(findedCars, car.samePosition(max));
+        }
+        return findedCars;
+    }
+
+    private void findCars(List<Car> findedCars, Optional<Car> max) {
+        if (max.isPresent()) {
+            findedCars.add(max.get());
+        }
     }
 }
