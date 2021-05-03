@@ -37,9 +37,20 @@ public class CarsTest {
                 new Car("자동차2", 0), new Car("자동차3", 0));
     }
 
-    @DisplayName("자동차 최소 대수 테스트 - 2대 이상이어야 함")
+    @DisplayName("자동차 최소 대수 테스트 - 2대 이상일 경우 정상생성")
     @Test
-    void validateCarsSize() {
+    void validateCarsSize1() {
+        Car car1 = new Car("차1", 0);
+        Car car2 = new Car("차2", 1);
+
+        Cars cars = new Cars(asList(car1, car2));
+
+        assertThat(cars.getCars()).containsExactly(car1, car2);
+    }
+
+    @DisplayName("자동차 최소 대수 테스트 - 2대 이상이 아닐 경우 예외발생")
+    @Test
+    void validateCarsSize2() {
         assertThatThrownBy(() -> new Cars(Collections.singletonList((new Car("자동차1", 0)))))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("자동차 게임은 최소 차 2대 이상은 되어야 합니다.");

@@ -10,9 +10,18 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class PositionTest {
 
+    @DisplayName("자동차 이동상태 값 정상 생성 테스트")
+    @ParameterizedTest
+    @ValueSource(ints = {1, 5, Integer.MAX_VALUE})
+    void createPosition(int position) {
+        Position created = new Position(position);
+
+        assertThat(created.getValue()).isEqualTo(position);
+    }
+
     @DisplayName("자동차 이동상태 값은 음수가 될 수 없음")
     @ParameterizedTest
-    @ValueSource(ints = {-1, -5, -Integer.MIN_VALUE})
+    @ValueSource(ints = {-1, -5, Integer.MIN_VALUE})
     void validatePosition(int position) {
         assertThatThrownBy(() -> new Position(position))
                 .isInstanceOf(IllegalArgumentException.class)

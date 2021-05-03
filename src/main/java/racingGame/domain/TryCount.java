@@ -20,4 +20,8 @@ public class TryCount {
     public boolean hasNext(int actualTry) {
         return actualTry < count;
     }
+
+    public int getValue() {
+        return count;
+    }
 }
