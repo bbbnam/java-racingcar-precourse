@@ -38,6 +38,14 @@ public class Car implements Comparable<Car> {
         return Optional.empty();
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
     @Override
     public int compareTo(Car other) {
         return this.position - other.position;
