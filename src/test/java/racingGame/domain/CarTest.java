@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -52,5 +54,27 @@ class CarTest {
         assertThatThrownBy(() -> new Car("자동차1", position))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("이동상태(position) 값은 음수가 될 수 없습니다.");
+    }
+
+    @DisplayName("비교 대상(max_position) 자동차와 같은 이동상태(position) 값을 갖는지 테스트 - 같을때")
+    @Test
+    void samePosition() {
+        Car maxPosition = new Car("자동차2", 0);
+
+        Optional<Car> optCar = car.samePosition(maxPosition);
+
+        assertThat(optCar.isPresent()).isTrue();
+        assertThat(optCar.get()).isEqualTo(car);
+    }
+
+    @DisplayName("비교 대상(max_position) 자동차와 같은 이동상태(position) 값을 갖는지 테스트 - 다를때")
+    @Test
+    void notSamePosition() {
+        Car maxPosition = new Car("자동차2", 2);
+
+        Optional<Car> optCar = car.samePosition(maxPosition);
+
+        assertThat(optCar.isPresent()).isFalse();
+        assertThat(optCar).isEmpty();
     }
 }

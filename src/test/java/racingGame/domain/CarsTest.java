@@ -44,4 +44,29 @@ public class CarsTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("자동차 게임은 최소 차 2대 이상은 되어야 합니다.");
     }
+
+    @DisplayName("자동차들 중 가장 큰 이동상태(position) -> [진행을 많이한] 차량을 정상적으로 찾는지 테스트")
+    @Test
+    void findMaxPosition() {
+        Car car1 = new Car("차1", 1);
+        Car car2 = new Car("차2", 2);
+        Car car3 = new Car("차3", 0);
+
+        Cars cars = new Cars(asList(car1, car2, car3));
+
+        assertThat(cars.findMaxPosition()).isEqualTo(car2);
+    }
+
+    @DisplayName("메시지로 주어진 차량과 같은 이동상태값을 갖는 차량들 찾기 테스트")
+    @Test
+    void findSamePosition() {
+        Car car1 = new Car("차1", 1);
+        Car car2 = new Car("차2", 2);
+        Car car3 = new Car("차3", 0);
+
+        Cars cars = new Cars(asList(car1, car2, car3));
+
+        assertThat(cars.findSamePosition(new Car("새로운차", 1)))
+                .isEqualTo(Collections.singletonList(car1));
+    }
 }
