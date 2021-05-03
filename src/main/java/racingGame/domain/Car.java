@@ -5,7 +5,7 @@ import java.util.Objects;
 public class Car {
 
     private final String name;
-    private final int position;
+    private int position;
 
     public Car(String name, int position) {
         this.name = name;
@@ -24,5 +24,12 @@ public class Car {
     @Override
     public int hashCode() {
         return Objects.hash(name, position);
+    }
+
+    public Car move(MoveStrategy moveStrategy) {
+        if (moveStrategy.isMoveable()) {
+            position++;
+        }
+        return new Car(this.name, this.position);
     }
 }
