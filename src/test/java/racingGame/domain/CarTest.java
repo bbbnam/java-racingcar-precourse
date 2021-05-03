@@ -44,4 +44,13 @@ class CarTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("이름은 5자 이하만 가능합니다.");
     }
+
+    @DisplayName("자동차 이동상태 값은 음수가 될 수 없음")
+    @ParameterizedTest
+    @ValueSource(ints = {-1, -5})
+    void validatePosition(int position) {
+        assertThatThrownBy(() -> new Car("자동차1", position))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("이동상태(position) 값은 음수가 될 수 없습니다.");
+    }
 }
