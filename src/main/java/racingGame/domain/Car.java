@@ -12,6 +12,13 @@ public class Car {
         this.position = position;
     }
 
+    public Car move(MoveStrategy moveStrategy) {
+        if (moveStrategy.isMoveable()) {
+            position++;
+        }
+        return new Car(this.name, this.position);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -24,12 +31,5 @@ public class Car {
     @Override
     public int hashCode() {
         return Objects.hash(name, position);
-    }
-
-    public Car move(MoveStrategy moveStrategy) {
-        if (moveStrategy.isMoveable()) {
-            position++;
-        }
-        return new Car(this.name, this.position);
     }
 }

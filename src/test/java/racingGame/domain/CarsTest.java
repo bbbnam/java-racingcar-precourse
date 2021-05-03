@@ -15,7 +15,7 @@ public class CarsTest {
         Cars cars = new Cars(Arrays.asList(new Car("자동차1", 0),
                 new Car("자동차2", 0), new Car("자동차3", 0)));
 
-        cars.moveAll(() -> true);
+        cars = cars.moveAll(() -> true);
 
         assertThat(cars.getCars()).containsExactly(new Car("자동차1", 1),
                 new Car("자동차2", 1), new Car("자동차3", 1));
@@ -27,7 +27,7 @@ public class CarsTest {
         Cars cars = new Cars(Arrays.asList(new Car("자동차1", 0),
                 new Car("자동차2", 0), new Car("자동차3", 0)));
 
-        cars.moveAll(() -> false);
+        cars = cars.moveAll(() -> false);
 
         assertThat(cars.getCars()).containsExactly(new Car("자동차1", 0),
                 new Car("자동차2", 0), new Car("자동차3", 0));
