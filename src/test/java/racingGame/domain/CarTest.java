@@ -3,13 +3,10 @@ package racingGame.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class CarTest {
 
@@ -36,24 +33,6 @@ class CarTest {
     @Test
     void stop() {
         assertThat(car.move(() -> false)).isEqualTo(new Car("자동차1", 0));
-    }
-
-    @DisplayName("자동차 이름은 5자 이하인지 테스트 - 5자 초과시 예외발생 테스트")
-    @ParameterizedTest
-    @ValueSource(strings = {"crongs", "honux2", "pororo", "loopy&patty"})
-    void validateCarName(String carName) {
-        assertThatThrownBy(() -> new Car(carName))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("이름은 5자 이하만 가능합니다.");
-    }
-
-    @DisplayName("자동차 이동상태 값은 음수가 될 수 없음")
-    @ParameterizedTest
-    @ValueSource(ints = {-1, -5})
-    void validatePosition(int position) {
-        assertThatThrownBy(() -> new Car("자동차1", position))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("이동상태(position) 값은 음수가 될 수 없습니다.");
     }
 
     @DisplayName("비교 대상(max_position) 자동차와 같은 이동상태(position) 값을 갖는지 테스트 - 같을때")
