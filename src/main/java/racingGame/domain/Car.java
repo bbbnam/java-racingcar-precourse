@@ -3,7 +3,7 @@ package racingGame.domain;
 import java.util.Objects;
 import java.util.Optional;
 
-public class Car implements Comparable<Car>{
+public class Car implements Comparable<Car> {
 
     private final String name;
     private int position;
@@ -13,8 +13,15 @@ public class Car implements Comparable<Car>{
     }
 
     public Car(String name, int position) {
+        validateName(name);
         this.name = name;
         this.position = position;
+    }
+
+    private void validateName(String name) {
+        if (name.length() > 5) {
+            throw new IllegalArgumentException("이름은 5자 이하만 가능합니다.");
+        }
     }
 
     public Car move(MoveStrategy moveStrategy) {
