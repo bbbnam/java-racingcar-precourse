@@ -3,11 +3,14 @@ package racingGame.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 
 class RacingGameTest {
@@ -48,5 +51,16 @@ class RacingGameTest {
 
         assertThat(finalRecords.getCars()).containsExactly(new Car("pobi", 0),
                 new Car("crong", 0), new Car("honux", 0));
+    }
+
+    @DisplayName("자동차 게임 진행 시도 횟수 테스트 - 0 또는 음수는 올 수 없음[0 또는 음수일때 예외발생]")
+    @ParameterizedTest
+    @ValueSource(ints = {0, -1, -10, -Integer.MIN_VALUE})
+    void validateTryCount(int tryCount) {
+        List<String> carNames = asList("pobi", "crong", "honux");
+
+        assertThatThrownBy(() -> new RacingGame(carNames, tryCount))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("시도 횟수는 적어도 1보단 커야 합니다.");
     }
 }

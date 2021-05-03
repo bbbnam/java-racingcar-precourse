@@ -37,7 +37,7 @@ public class CarsTest {
                 new Car("자동차2", 0), new Car("자동차3", 0));
     }
 
-    @DisplayName("자동차 최소 대수 테스트 - 1대 이상이어야 함")
+    @DisplayName("자동차 최소 대수 테스트 - 2대 이상이어야 함")
     @Test
     void validateCarsSize() {
         assertThatThrownBy(() -> new Cars(Collections.singletonList((new Car("자동차1", 0)))))
